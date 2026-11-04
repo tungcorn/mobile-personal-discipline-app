@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'providers/habit_provider.dart';
 import 'providers/theme_provider.dart';
 import 'repositories/habit_repository.dart';
+import 'screens/add_edit_habit_screen.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
@@ -79,6 +80,16 @@ class PersonalDisciplineApp extends StatelessWidget {
       ),
     );
 
+    final screenParam = Uri.base.queryParameters['screen'];
+    Widget initialScreen = const HomeScreen();
+    if (screenParam == 'stats') {
+      initialScreen = const HomeScreen(initialIndex: 1);
+    } else if (screenParam == 'settings') {
+      initialScreen = const HomeScreen(initialIndex: 2);
+    } else if (screenParam == 'add') {
+      initialScreen = const AddEditHabitScreen();
+    }
+
     return MaterialApp(
       title: 'Kỷ Luật Cá Nhân - Personal Discipline',
       debugShowCheckedModeBanner: false,
@@ -86,7 +97,7 @@ class PersonalDisciplineApp extends StatelessWidget {
       themeMode: themeProvider.themeMode,
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: const HomeScreen(),
+      home: initialScreen,
     );
   }
 }
