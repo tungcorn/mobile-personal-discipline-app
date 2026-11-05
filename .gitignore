@@ -46,3 +46,10 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Local agents, media, and video artifacts
+.agents/
+scripts/
+screenshots/
+video_output/
+*.mp4
